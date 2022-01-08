@@ -33,25 +33,64 @@ public static class ArrayExtensions
 }
 
 public class ExThread
-{
+{   
+    int thread_number;
+    double h;
+    decimal[] results;
+    int n;
+    static readonly object pblock = new object();
+    public ExThread(int thread_number, double h, int n){
+        this.thread_number=thread_number;
+        this.h=h;
+        this.n=n;
+        this.results = new decimal[thread_number];
+    }
+
+    public decimal[] get_results(){
+        lock(results){
+            return results;
+        }
+    }
+    
+    public static double Chebyshev(double x, int n)
+    {
+        double T1, T2, T3;
+        double F = 0;
+
+        T1 = 1;
+        T2 = x;
+        T3 = 0;
+        for (int i = 0; i < n; i++)
+        {
+            T3 = 2 * x * T2 - T1;
+            T1 = T2;
+            T2 = T3;
+        }
+        F = Math.Sqrt(Math.Sqrt(Math.Abs(T3)));
+
+        return F;
+    }
 
     public void mythread1(int thread_number, double[] x_array)
     {
         var watch = System.Diagnostics.Stopwatch.StartNew();
-        System.Threading.Thread.Sleep(1000 * thread_number);
-        Console.WriteLine();
+        decimal local_results =0;
 
         for (int i = 0; i < x_array.Length; i++)
         {
+            local_results += System.Convert.ToDecimal(h * Chebyshev(x_array[i], this.n));
+            // Console.Write(x_array[i] + ",");
+        }
 
-            Console.Write(x_array[i] + ",");
+        lock(results){
+            results[thread_number] = local_results;
         }
 
         watch.Stop();
         var elapsedMs = watch.ElapsedMilliseconds;
 
 
-        Console.WriteLine("thread number: " + (thread_number + 1) + "  time: " + elapsedMs);
+        Console.WriteLine("thread number: " + (thread_number + 1) + "  time: " + elapsedMs + " local result: " + local_results);
     }
 }
 
@@ -59,42 +98,16 @@ public class GFG
 {
     public static void Main()
     {
-        //Link do pliku z parametrami!!!
-        string[] lines = System.IO.File.ReadAllLines(@"C:\Users\01122363\Desktop\Dane.txt");
-
+        string[] lines = System.IO.File.ReadAllLines("./dane.txt");
         int n = Int32.Parse(lines[0]);
         double a = Double.Parse(lines[1]);
         double b = Double.Parse(lines[2]);
         int N = Int32.Parse(lines[3]);
-
         double h = (b - a) / N;
         double Fx0 = 0;
         double Fxn = 0;
         decimal Result = 0;
         int thread_number = 10;
-
-
-        var watch = System.Diagnostics.Stopwatch.StartNew();
-
-        double Chebyshev(double x)
-        {
-            double T1, T2, T3;
-            double F = 0;
-
-            T1 = 1;
-            T2 = x;
-            T3 = 0;
-
-            for (int i = 0; i < n; i++)
-            {
-                T3 = 2 * x * T2 - T1;
-                T1 = T2;
-                T2 = T3;
-            }
-            F = Math.Sqrt(Math.Sqrt(Math.Abs(T3)));
-
-            return F;
-        }
 
         double[] create_array(double a, double b, int N)
         {
@@ -111,45 +124,33 @@ public class GFG
             return array;
         }
 
-        double Fx = Chebyshev(3);
         double[] Array = new double[N - 2];
         Array = create_array(a, b, N);
         var listOfSplitArray = Array.Split(thread_number);
 
-        //Tu masz Andrzej ilosc podzielonych tablic
-        Console.WriteLine(listOfSplitArray.Count());
+        var watch1 = System.Diagnostics.Stopwatch.StartNew();
 
-
-        foreach (var element in listOfSplitArray)
-        {
-            element.ToArray();
-            foreach (var element2 in element)
-            {
-                //wypisuje kazdy element z nowej tablicy
-                Console.WriteLine(element2);
-            }
-            Console.WriteLine("The end of current array");
-        }
-
-        Fx0 = h / 2 * Chebyshev(a);
-        Fxn = h / 2 * Chebyshev(b);
+        Fx0 = h / 2 * ExThread.Chebyshev(a, n);
+        Fxn = h / 2 * ExThread.Chebyshev(b, n);
 
         for (int i = 0; i < N - 2; i++)
         {
-            Result = Result + System.Convert.ToDecimal(h * Chebyshev(Array[i]));
+            Result = Result + System.Convert.ToDecimal(h * ExThread.Chebyshev(Array[i], n));
         }
 
         Result = Result + System.Convert.ToDecimal(Fx0 + Fxn);
 
-        watch.Stop();
-        var elapsedMs = watch.ElapsedMilliseconds;
+        watch1.Stop();
+        var elapsedMs1 = watch1.ElapsedMilliseconds;
 
-        Console.WriteLine("Result: " + Result);
-        Console.WriteLine("time: " + elapsedMs);
+        Console.WriteLine("Sequntial Result: " + Result);
+        Console.WriteLine("Sequntial Time: " + elapsedMs1);
 
-        ExThread obj = new ExThread();
+        ExThread obj = new ExThread(thread_number,h,n);
 
         Thread[] threads_array = new Thread[thread_number];
+
+        var watch2 = System.Diagnostics.Stopwatch.StartNew();
         for (var i = 0; i < threads_array.Length; i++)
         {
             var xd = i;
@@ -161,6 +162,18 @@ public class GFG
         {
             threads_array[i].Join();
         }
+
+        watch2.Stop();
+        var elapsedMs2 = watch2.ElapsedMilliseconds;
+
         Console.WriteLine("joined add threads");
+
+        decimal thread_result = 0;
+        for(int i = 0; i< thread_number; i++){
+            thread_result += obj.get_results()[i];
+        }
+        thread_result += System.Convert.ToDecimal(Fx0 + Fxn);
+        Console.WriteLine("Thread Result: " + thread_result);
+        Console.WriteLine("Thread Time: " + elapsedMs2);
     }
 }
