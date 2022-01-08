@@ -5,14 +5,33 @@ using System.Threading;
 
 public static class ArrayExtensions
 {
-    public static IEnumerable<IEnumerable<T>> Split<T>(this T[] array, int size)
+    public static IEnumerable<IEnumerable<T>> Split<T>(this T[] array, int splitInto)
     {
-        for (var i = 0; i < (float)array.Length / size; i++)
+        var initialValue = array.Length / splitInto;
+        var itemsLeft = array.Length - initialValue * splitInto;
+        var itemsQuantityList = new List<int>();
+        for (var i = 0; i < splitInto; i++)
         {
-            yield return array.Skip(i * size).Take(size);
+            if (i < itemsLeft)
+            {
+                itemsQuantityList.Add(initialValue + 1);
+            }
+            else
+            {
+                itemsQuantityList.Add(initialValue);
+            }
         }
+        var splitArray = new List<List<T>>();
+        var sum = 0;
+        for (var i = 0; i < splitInto; i++)
+        {
+            splitArray.Add(array.Skip(sum).Take(itemsQuantityList.ElementAt(i)).ToList());
+            sum = +itemsQuantityList.ElementAt(i);
+        }
+        return splitArray;
     }
 }
+
 public class ExThread
 {
 
@@ -27,7 +46,7 @@ public class ExThread
 
             Console.Write(x_array[i] + ",");
         }
-        
+
         watch.Stop();
         var elapsedMs = watch.ElapsedMilliseconds;
 
@@ -40,14 +59,14 @@ public class GFG
 {
     public static void Main()
     {
-        //Link do pliku z parametrami
+        //Link do pliku z parametrami!!!
         string[] lines = System.IO.File.ReadAllLines(@"C:\Users\01122363\Desktop\Dane.txt");
 
         int n = Int32.Parse(lines[0]);
         double a = Double.Parse(lines[1]);
         double b = Double.Parse(lines[2]);
         int N = Int32.Parse(lines[3]);
-        
+
         double h = (b - a) / N;
         double Fx0 = 0;
         double Fxn = 0;
@@ -56,7 +75,7 @@ public class GFG
 
 
         var watch = System.Diagnostics.Stopwatch.StartNew();
-        
+
         double Chebyshev(double x)
         {
             double T1, T2, T3;
@@ -95,16 +114,16 @@ public class GFG
         double Fx = Chebyshev(3);
         double[] Array = new double[N - 2];
         Array = create_array(a, b, N);
-        var listOfSplitArray = Array.Split(((N-2)/(thread_number)));
+        var listOfSplitArray = Array.Split(thread_number);
 
         //Tu masz Andrzej ilosc podzielonych tablic
         Console.WriteLine(listOfSplitArray.Count());
-        
 
-        foreach(var element in listOfSplitArray)
+
+        foreach (var element in listOfSplitArray)
         {
             element.ToArray();
-            foreach(var element2 in element)
+            foreach (var element2 in element)
             {
                 //wypisuje kazdy element z nowej tablicy
                 Console.WriteLine(element2);
@@ -143,5 +162,5 @@ public class GFG
             threads_array[i].Join();
         }
         Console.WriteLine("joined add threads");
-    }       
+    }
 }
