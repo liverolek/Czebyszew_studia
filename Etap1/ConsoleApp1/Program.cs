@@ -26,7 +26,7 @@ public static class ArrayExtensions
         for (var i = 0; i < splitInto; i++)
         {
             splitArray.Add(array.Skip(sum).Take(itemsQuantityList.ElementAt(i)).ToList());
-            sum = +itemsQuantityList.ElementAt(i);
+            sum += itemsQuantityList.ElementAt(i);
         }
         return splitArray;
     }
@@ -76,14 +76,12 @@ public class ExThread
         for (int i = 0; i < x_array.Length; i++)
         {
             local_results += System.Convert.ToDecimal(h * Chebyshev.CalcChebyshev(x_array[i], this.n));
-            // Console.Write(x_array[i] + ",");
         }
         lock(results){
             results[thread_number] = local_results;
         }
         watch.Stop();
         var elapsedMs = watch.ElapsedMilliseconds;
-
         Console.WriteLine("thread number: " + (thread_number + 1) + "  time: " + elapsedMs + " local result: " + local_results);
     }
 }
@@ -120,7 +118,7 @@ public class GFG
         double[] Array = new double[N - 2];
         Array = create_array(a, b, N);
         var listOfSplitArray = Array.Split(thread_number);
-
+        
 
         // Sequential calculations: 
         var watch1 = System.Diagnostics.Stopwatch.StartNew();
@@ -136,6 +134,14 @@ public class GFG
         Console.WriteLine("Sequntial Result: " + Result);
         Console.WriteLine("Sequntial Time: " + elapsedMs1);
 
+        // display data
+        // for (var i =0; i< thread_number ; i++){
+        //     var asd =listOfSplitArray.ElementAt(i).ToArray();
+        //     Console.WriteLine("thread: "+i);
+        //     for(int j=0; j< asd.Length; j++){
+        //         Console.WriteLine(asd[j] + ",");
+        //     }
+        // }
 
         // Threaded calculations:   
         ExThread obj = new ExThread(thread_number,h,n);
