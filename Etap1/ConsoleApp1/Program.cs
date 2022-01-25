@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+// using Grpc.Net.Client;
+
 
 public static class ArrayExtensions
 {
@@ -118,6 +120,11 @@ public class GFG
         double[] Array = new double[N - 2];
         Array = create_array(a, b, N);
         var listOfSplitArray = Array.Split(thread_number);
+
+
+        // setup grpc
+        // var channel = GrpcChannel.ForAddress("https://localhost:7046");
+        // var client = new
         
 
         // Sequential calculations: 
