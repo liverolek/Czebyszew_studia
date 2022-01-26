@@ -1,7 +1,7 @@
 using Grpc.Core;
 using GrpcGreeter;
 
-namespace GrpcGreeter.Services;
+namespace GrpcGreeter.Services{
 
 public static class Chebyshev{
     public static double CalcChebyshev(double x, int n)
@@ -87,12 +87,17 @@ public class GreeterService : Greeter.GreeterBase
         Array = create_array(request.Avalue, request.Bvalue, request.Nvalue);
         var listOfSplitArray = Array.Split(request.WorkersCount);
         var arr = listOfSplitArray.ElementAt(request.WorkerNumber).ToArray();
-
-        foreach (double item in arr)
-        {
-            local_results += request.Hvalue * Chebyshev.CalcChebyshev(item, request.Nvalue);
+        
+        // System.Threading.Thread.Sleep(1000* request.WorkerNumber);
+        // Console.WriteLine("");
+        // Console.WriteLine("");
+        // Console.WriteLine(request);
+        for(int i = 0; i< arr.Length; i++) {
+            // Console.Write(arr[i] + ", ");
+            local_results += request.Hvalue * Chebyshev.CalcChebyshev(arr[i], 100);
             iterations ++ ;
         }
+        // Console.WriteLine("local result: " + local_results);
 
         return Task.FromResult(new HelloReply
         {   
@@ -100,4 +105,5 @@ public class GreeterService : Greeter.GreeterBase
             Iterations = iterations
         });
     }
+}
 }

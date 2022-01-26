@@ -190,15 +190,17 @@ namespace ConsoleApp3
                 // {
                 //     request.Add(arr[j]);
                 // }
-                responses[i] = clients[i].SayHelloAsync(new HelloRequest { 
+                var req = new HelloRequest { 
                         Nvalue = N,
                         Hvalue = h,
                         WorkersCount = args.Length,
-                        WorkerNumber = i,
+                        WorkerNumber = xd,
                         Avalue = a,
                         Bvalue = b,
-                });
-
+                };
+                Console.WriteLine(req);
+                responses[i] = clients[i].SayHelloAsync(req);
+                
             }
             var whenall = await Task.WhenAll(responses.Select(c=>c.ResponseHeadersAsync));
             for (var i = 0; i < args.Length; i++)
