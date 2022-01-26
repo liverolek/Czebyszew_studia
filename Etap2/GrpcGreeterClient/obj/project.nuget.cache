@@ -1,16 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "JYpQDWmne8f9oUpyHd37OKE6mX+UHqO6Cru/n+i6IbSefI/oj/neIub7ll6pbe3ofrzkSWwT4LMTYVoUSrAcNw==",
+  "dgSpecHash": "CBefIGgEwxX3tAhnRoqYU8ohLLc4EmFcww5eVNSIgVl4QOwF2M4qFuMwCUazSa74+HSghM2EDKBmSI16NtRTTA==",
   "success": true,
-  "projectFilePath": "/home/george/workspace/project/rozproszone/Czebyszew_studia/Etap2/GrpcGreeterClient/GrpcGreeterClient.csproj",
+  "projectFilePath": "C:\\Nowy\\Czebyszew_studia\\Etap2\\GrpcGreeterClient\\GrpcGreeterClient.csproj",
   "expectedPackageFiles": [
-    "/home/george/.nuget/packages/google.protobuf/3.19.3/google.protobuf.3.19.3.nupkg.sha512",
-    "/home/george/.nuget/packages/grpc.core.api/2.42.0/grpc.core.api.2.42.0.nupkg.sha512",
-    "/home/george/.nuget/packages/grpc.net.client/2.42.0/grpc.net.client.2.42.0.nupkg.sha512",
-    "/home/george/.nuget/packages/grpc.net.common/2.42.0/grpc.net.common.2.42.0.nupkg.sha512",
-    "/home/george/.nuget/packages/grpc.tools/2.43.0/grpc.tools.2.43.0.nupkg.sha512",
-    "/home/george/.nuget/packages/microsoft.extensions.logging.abstractions/3.0.3/microsoft.extensions.logging.abstractions.3.0.3.nupkg.sha512",
-    "/home/george/.nuget/packages/system.memory/4.5.3/system.memory.4.5.3.nupkg.sha512"
+    "C:\\Users\\01122363\\.nuget\\packages\\google.protobuf\\3.19.3\\google.protobuf.3.19.3.nupkg.sha512",
+    "C:\\Users\\01122363\\.nuget\\packages\\grpc.core.api\\2.42.0\\grpc.core.api.2.42.0.nupkg.sha512",
+    "C:\\Users\\01122363\\.nuget\\packages\\grpc.net.client\\2.42.0\\grpc.net.client.2.42.0.nupkg.sha512",
+    "C:\\Users\\01122363\\.nuget\\packages\\grpc.net.common\\2.42.0\\grpc.net.common.2.42.0.nupkg.sha512",
+    "C:\\Users\\01122363\\.nuget\\packages\\grpc.tools\\2.43.0\\grpc.tools.2.43.0.nupkg.sha512",
+    "C:\\Users\\01122363\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\3.0.3\\microsoft.extensions.logging.abstractions.3.0.3.nupkg.sha512",
+    "C:\\Users\\01122363\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512"
   ],
   "logs": []
 }

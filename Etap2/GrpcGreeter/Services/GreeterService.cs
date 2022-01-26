@@ -60,8 +60,7 @@ public class GreeterService : Greeter.GreeterBase
     public GreeterService(ILogger<GreeterService> logger)
     {
         _logger = logger;
-    }
-    
+    }    
 
     static double[] create_array(double a, double b, int N)
         {
@@ -80,25 +79,18 @@ public class GreeterService : Greeter.GreeterBase
 
     public override Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
     {
-        // System.Threading.Thread.Sleep(1000);
-        double local_results =0;
+       double local_results =0;
         int iterations = 0;
         double[] Array = new double[request.Nvalue - 2];
         Array = create_array(request.Avalue, request.Bvalue, request.Nvalue);
         var listOfSplitArray = Array.Split(request.WorkersCount);
         var arr = listOfSplitArray.ElementAt(request.WorkerNumber).ToArray();
         
-        // System.Threading.Thread.Sleep(1000* request.WorkerNumber);
-        // Console.WriteLine("");
-        // Console.WriteLine("");
-        // Console.WriteLine(request);
         for(int i = 0; i< arr.Length; i++) {
-            // Console.Write(arr[i] + ", ");
             local_results += request.Hvalue * Chebyshev.CalcChebyshev(arr[i], request.SmallNValue);
             iterations ++ ;
         }
-        // Console.WriteLine("local result: " + local_results);
-
+        
         return Task.FromResult(new HelloReply
         {   
             Response = local_results,

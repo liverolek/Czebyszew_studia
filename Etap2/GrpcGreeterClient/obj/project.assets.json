@@ -260,24 +260,31 @@
     ]
   },
   "packageFolders": {
-    "/home/george/.nuget/packages/": {}
+    "C:\\Users\\01122363\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/george/workspace/project/rozproszone/Czebyszew_studia/Etap2/GrpcGreeterClient/GrpcGreeterClient.csproj",
+      "projectUniqueName": "C:\\Nowy\\Czebyszew_studia\\Etap2\\GrpcGreeterClient\\GrpcGreeterClient.csproj",
       "projectName": "GrpcGreeterClient",
-      "projectPath": "/home/george/workspace/project/rozproszone/Czebyszew_studia/Etap2/GrpcGreeterClient/GrpcGreeterClient.csproj",
-      "packagesPath": "/home/george/.nuget/packages/",
-      "outputPath": "/home/george/workspace/project/rozproszone/Czebyszew_studia/Etap2/GrpcGreeterClient/obj/",
+      "projectPath": "C:\\Nowy\\Czebyszew_studia\\Etap2\\GrpcGreeterClient\\GrpcGreeterClient.csproj",
+      "packagesPath": "C:\\Users\\01122363\\.nuget\\packages\\",
+      "outputPath": "C:\\Nowy\\Czebyszew_studia\\Etap2\\GrpcGreeterClient\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/home/george/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\01122363\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -326,7 +333,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }
