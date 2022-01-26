@@ -24,17 +24,17 @@ namespace GrpcGreeter {
     static GreetReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChJQcm90b3MvZ3JlZXQucHJvdG8SBWdyZWV0InoKDEhlbGxvUmVxdWVzdBIO",
-            "CgZudmFsdWUYAiABKAUSDgoGaHZhbHVlGAMgASgBEhQKDHdvcmtlcnNDb3Vu",
-            "dBgEIAEoBRIUCgx3b3JrZXJOdW1iZXIYBSABKAUSDgoGYXZhbHVlGAYgASgB",
-            "Eg4KBmJ2YWx1ZRgHIAEoASIyCgpIZWxsb1JlcGx5EhAKCHJlc3BvbnNlGAEg",
-            "ASgBEhIKCml0ZXJhdGlvbnMYAiABKAUyPQoHR3JlZXRlchIyCghTYXlIZWxs",
-            "bxITLmdyZWV0LkhlbGxvUmVxdWVzdBoRLmdyZWV0LkhlbGxvUmVwbHlCDqoC",
-            "C0dycGNHcmVldGVyYgZwcm90bzM="));
+            "ChJQcm90b3MvZ3JlZXQucHJvdG8SBWdyZWV0Io8BCgxIZWxsb1JlcXVlc3QS",
+            "DgoGbnZhbHVlGAIgASgFEg4KBmh2YWx1ZRgDIAEoARIUCgx3b3JrZXJzQ291",
+            "bnQYBCABKAUSFAoMd29ya2VyTnVtYmVyGAUgASgFEg4KBmF2YWx1ZRgGIAEo",
+            "ARIOCgZidmFsdWUYByABKAESEwoLc21hbGxOVmFsdWUYCCABKAUiMgoKSGVs",
+            "bG9SZXBseRIQCghyZXNwb25zZRgBIAEoARISCgppdGVyYXRpb25zGAIgASgF",
+            "Mj0KB0dyZWV0ZXISMgoIU2F5SGVsbG8SEy5ncmVldC5IZWxsb1JlcXVlc3Qa",
+            "ES5ncmVldC5IZWxsb1JlcGx5Qg6qAgtHcnBjR3JlZXRlcmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::GrpcGreeter.HelloRequest), global::GrpcGreeter.HelloRequest.Parser, new[]{ "Nvalue", "Hvalue", "WorkersCount", "WorkerNumber", "Avalue", "Bvalue" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::GrpcGreeter.HelloRequest), global::GrpcGreeter.HelloRequest.Parser, new[]{ "Nvalue", "Hvalue", "WorkersCount", "WorkerNumber", "Avalue", "Bvalue", "SmallNValue" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GrpcGreeter.HelloReply), global::GrpcGreeter.HelloReply.Parser, new[]{ "Response", "Iterations" }, null, null, null, null)
           }));
     }
@@ -80,6 +80,7 @@ namespace GrpcGreeter {
       workerNumber_ = other.workerNumber_;
       avalue_ = other.avalue_;
       bvalue_ = other.bvalue_;
+      smallNValue_ = other.smallNValue_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -157,6 +158,17 @@ namespace GrpcGreeter {
       }
     }
 
+    /// <summary>Field number for the "smallNValue" field.</summary>
+    public const int SmallNValueFieldNumber = 8;
+    private int smallNValue_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int SmallNValue {
+      get { return smallNValue_; }
+      set {
+        smallNValue_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as HelloRequest);
@@ -176,6 +188,7 @@ namespace GrpcGreeter {
       if (WorkerNumber != other.WorkerNumber) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(Avalue, other.Avalue)) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(Bvalue, other.Bvalue)) return false;
+      if (SmallNValue != other.SmallNValue) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -188,6 +201,7 @@ namespace GrpcGreeter {
       if (WorkerNumber != 0) hash ^= WorkerNumber.GetHashCode();
       if (Avalue != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(Avalue);
       if (Bvalue != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(Bvalue);
+      if (SmallNValue != 0) hash ^= SmallNValue.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -228,6 +242,10 @@ namespace GrpcGreeter {
         output.WriteRawTag(57);
         output.WriteDouble(Bvalue);
       }
+      if (SmallNValue != 0) {
+        output.WriteRawTag(64);
+        output.WriteInt32(SmallNValue);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -261,6 +279,10 @@ namespace GrpcGreeter {
         output.WriteRawTag(57);
         output.WriteDouble(Bvalue);
       }
+      if (SmallNValue != 0) {
+        output.WriteRawTag(64);
+        output.WriteInt32(SmallNValue);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -287,6 +309,9 @@ namespace GrpcGreeter {
       }
       if (Bvalue != 0D) {
         size += 1 + 8;
+      }
+      if (SmallNValue != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(SmallNValue);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -316,6 +341,9 @@ namespace GrpcGreeter {
       }
       if (other.Bvalue != 0D) {
         Bvalue = other.Bvalue;
+      }
+      if (other.SmallNValue != 0) {
+        SmallNValue = other.SmallNValue;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -355,6 +383,10 @@ namespace GrpcGreeter {
             Bvalue = input.ReadDouble();
             break;
           }
+          case 64: {
+            SmallNValue = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -391,6 +423,10 @@ namespace GrpcGreeter {
           }
           case 57: {
             Bvalue = input.ReadDouble();
+            break;
+          }
+          case 64: {
+            SmallNValue = input.ReadInt32();
             break;
           }
         }

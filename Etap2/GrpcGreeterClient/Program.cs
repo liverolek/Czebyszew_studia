@@ -197,6 +197,7 @@ namespace ConsoleApp3
                         WorkerNumber = xd,
                         Avalue = a,
                         Bvalue = b,
+                        SmallNValue = n
                 };
                 Console.WriteLine(req);
                 responses[i] = clients[i].SayHelloAsync(req);

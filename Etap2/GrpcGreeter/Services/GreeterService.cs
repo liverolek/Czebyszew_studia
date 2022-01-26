@@ -94,7 +94,7 @@ public class GreeterService : Greeter.GreeterBase
         // Console.WriteLine(request);
         for(int i = 0; i< arr.Length; i++) {
             // Console.Write(arr[i] + ", ");
-            local_results += request.Hvalue * Chebyshev.CalcChebyshev(arr[i], 100);
+            local_results += request.Hvalue * Chebyshev.CalcChebyshev(arr[i], request.SmallNValue);
             iterations ++ ;
         }
         // Console.WriteLine("local result: " + local_results);

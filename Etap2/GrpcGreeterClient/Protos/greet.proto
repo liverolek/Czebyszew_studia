@@ -19,6 +19,7 @@ message HelloRequest {
   int32 workerNumber = 5;
   double avalue = 6;
   double bvalue = 7;
+  int32 smallNValue = 8;
 }
 
 // The response message containing the greetings.
