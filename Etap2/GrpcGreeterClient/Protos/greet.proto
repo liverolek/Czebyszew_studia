@@ -12,9 +12,13 @@ service Greeter {
 
 // The request message containing the user's name.
 message HelloRequest {
-  repeated double request = 1;
+  // repeated double request = 1;
   int32 nvalue = 2;
   double hvalue = 3;
+  int32 workersCount = 4;
+  int32 workerNumber = 5;
+  double avalue = 6;
+  double bvalue = 7;
 }
 
 // The response message containing the greetings.

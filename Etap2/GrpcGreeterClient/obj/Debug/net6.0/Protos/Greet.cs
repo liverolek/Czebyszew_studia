@@ -24,16 +24,17 @@ namespace GrpcGreeterClient {
     static GreetReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChJQcm90b3MvZ3JlZXQucHJvdG8SBWdyZWV0Ij8KDEhlbGxvUmVxdWVzdBIP",
-            "CgdyZXF1ZXN0GAEgAygBEg4KBm52YWx1ZRgCIAEoBRIOCgZodmFsdWUYAyAB",
-            "KAEiMgoKSGVsbG9SZXBseRIQCghyZXNwb25zZRgBIAEoARISCgppdGVyYXRp",
-            "b25zGAIgASgFMj0KB0dyZWV0ZXISMgoIU2F5SGVsbG8SEy5ncmVldC5IZWxs",
-            "b1JlcXVlc3QaES5ncmVldC5IZWxsb1JlcGx5QhSqAhFHcnBjR3JlZXRlckNs",
-            "aWVudGIGcHJvdG8z"));
+            "ChJQcm90b3MvZ3JlZXQucHJvdG8SBWdyZWV0InoKDEhlbGxvUmVxdWVzdBIO",
+            "CgZudmFsdWUYAiABKAUSDgoGaHZhbHVlGAMgASgBEhQKDHdvcmtlcnNDb3Vu",
+            "dBgEIAEoBRIUCgx3b3JrZXJOdW1iZXIYBSABKAUSDgoGYXZhbHVlGAYgASgB",
+            "Eg4KBmJ2YWx1ZRgHIAEoASIyCgpIZWxsb1JlcGx5EhAKCHJlc3BvbnNlGAEg",
+            "ASgBEhIKCml0ZXJhdGlvbnMYAiABKAUyPQoHR3JlZXRlchIyCghTYXlIZWxs",
+            "bxITLmdyZWV0LkhlbGxvUmVxdWVzdBoRLmdyZWV0LkhlbGxvUmVwbHlCFKoC",
+            "EUdycGNHcmVldGVyQ2xpZW50YgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::GrpcGreeterClient.HelloRequest), global::GrpcGreeterClient.HelloRequest.Parser, new[]{ "Request", "Nvalue", "Hvalue" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::GrpcGreeterClient.HelloRequest), global::GrpcGreeterClient.HelloRequest.Parser, new[]{ "Nvalue", "Hvalue", "WorkersCount", "WorkerNumber", "Avalue", "Bvalue" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GrpcGreeterClient.HelloReply), global::GrpcGreeterClient.HelloReply.Parser, new[]{ "Response", "Iterations" }, null, null, null, null)
           }));
     }
@@ -78,9 +79,12 @@ namespace GrpcGreeterClient {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public HelloRequest(HelloRequest other) : this() {
-      request_ = other.request_.Clone();
       nvalue_ = other.nvalue_;
       hvalue_ = other.hvalue_;
+      workersCount_ = other.workersCount_;
+      workerNumber_ = other.workerNumber_;
+      avalue_ = other.avalue_;
+      bvalue_ = other.bvalue_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -90,20 +94,12 @@ namespace GrpcGreeterClient {
       return new HelloRequest(this);
     }
 
-    /// <summary>Field number for the "request" field.</summary>
-    public const int RequestFieldNumber = 1;
-    private static readonly pb::FieldCodec<double> _repeated_request_codec
-        = pb::FieldCodec.ForDouble(10);
-    private readonly pbc::RepeatedField<double> request_ = new pbc::RepeatedField<double>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::RepeatedField<double> Request {
-      get { return request_; }
-    }
-
     /// <summary>Field number for the "nvalue" field.</summary>
     public const int NvalueFieldNumber = 2;
     private int nvalue_;
+    /// <summary>
+    /// repeated double request = 1;
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int Nvalue {
@@ -125,6 +121,54 @@ namespace GrpcGreeterClient {
       }
     }
 
+    /// <summary>Field number for the "workersCount" field.</summary>
+    public const int WorkersCountFieldNumber = 4;
+    private int workersCount_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int WorkersCount {
+      get { return workersCount_; }
+      set {
+        workersCount_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "workerNumber" field.</summary>
+    public const int WorkerNumberFieldNumber = 5;
+    private int workerNumber_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int WorkerNumber {
+      get { return workerNumber_; }
+      set {
+        workerNumber_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "avalue" field.</summary>
+    public const int AvalueFieldNumber = 6;
+    private double avalue_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public double Avalue {
+      get { return avalue_; }
+      set {
+        avalue_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "bvalue" field.</summary>
+    public const int BvalueFieldNumber = 7;
+    private double bvalue_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public double Bvalue {
+      get { return bvalue_; }
+      set {
+        bvalue_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -140,9 +184,12 @@ namespace GrpcGreeterClient {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if(!request_.Equals(other.request_)) return false;
       if (Nvalue != other.Nvalue) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(Hvalue, other.Hvalue)) return false;
+      if (WorkersCount != other.WorkersCount) return false;
+      if (WorkerNumber != other.WorkerNumber) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(Avalue, other.Avalue)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(Bvalue, other.Bvalue)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -150,9 +197,12 @@ namespace GrpcGreeterClient {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      hash ^= request_.GetHashCode();
       if (Nvalue != 0) hash ^= Nvalue.GetHashCode();
       if (Hvalue != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(Hvalue);
+      if (WorkersCount != 0) hash ^= WorkersCount.GetHashCode();
+      if (WorkerNumber != 0) hash ^= WorkerNumber.GetHashCode();
+      if (Avalue != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(Avalue);
+      if (Bvalue != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(Bvalue);
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -171,7 +221,6 @@ namespace GrpcGreeterClient {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      request_.WriteTo(output, _repeated_request_codec);
       if (Nvalue != 0) {
         output.WriteRawTag(16);
         output.WriteInt32(Nvalue);
@@ -179,6 +228,22 @@ namespace GrpcGreeterClient {
       if (Hvalue != 0D) {
         output.WriteRawTag(25);
         output.WriteDouble(Hvalue);
+      }
+      if (WorkersCount != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(WorkersCount);
+      }
+      if (WorkerNumber != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(WorkerNumber);
+      }
+      if (Avalue != 0D) {
+        output.WriteRawTag(49);
+        output.WriteDouble(Avalue);
+      }
+      if (Bvalue != 0D) {
+        output.WriteRawTag(57);
+        output.WriteDouble(Bvalue);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -190,7 +255,6 @@ namespace GrpcGreeterClient {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      request_.WriteTo(ref output, _repeated_request_codec);
       if (Nvalue != 0) {
         output.WriteRawTag(16);
         output.WriteInt32(Nvalue);
@@ -198,6 +262,22 @@ namespace GrpcGreeterClient {
       if (Hvalue != 0D) {
         output.WriteRawTag(25);
         output.WriteDouble(Hvalue);
+      }
+      if (WorkersCount != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(WorkersCount);
+      }
+      if (WorkerNumber != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(WorkerNumber);
+      }
+      if (Avalue != 0D) {
+        output.WriteRawTag(49);
+        output.WriteDouble(Avalue);
+      }
+      if (Bvalue != 0D) {
+        output.WriteRawTag(57);
+        output.WriteDouble(Bvalue);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -209,11 +289,22 @@ namespace GrpcGreeterClient {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      size += request_.CalculateSize(_repeated_request_codec);
       if (Nvalue != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Nvalue);
       }
       if (Hvalue != 0D) {
+        size += 1 + 8;
+      }
+      if (WorkersCount != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(WorkersCount);
+      }
+      if (WorkerNumber != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(WorkerNumber);
+      }
+      if (Avalue != 0D) {
+        size += 1 + 8;
+      }
+      if (Bvalue != 0D) {
         size += 1 + 8;
       }
       if (_unknownFields != null) {
@@ -228,12 +319,23 @@ namespace GrpcGreeterClient {
       if (other == null) {
         return;
       }
-      request_.Add(other.request_);
       if (other.Nvalue != 0) {
         Nvalue = other.Nvalue;
       }
       if (other.Hvalue != 0D) {
         Hvalue = other.Hvalue;
+      }
+      if (other.WorkersCount != 0) {
+        WorkersCount = other.WorkersCount;
+      }
+      if (other.WorkerNumber != 0) {
+        WorkerNumber = other.WorkerNumber;
+      }
+      if (other.Avalue != 0D) {
+        Avalue = other.Avalue;
+      }
+      if (other.Bvalue != 0D) {
+        Bvalue = other.Bvalue;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -250,17 +352,28 @@ namespace GrpcGreeterClient {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 10:
-          case 9: {
-            request_.AddEntriesFrom(input, _repeated_request_codec);
-            break;
-          }
           case 16: {
             Nvalue = input.ReadInt32();
             break;
           }
           case 25: {
             Hvalue = input.ReadDouble();
+            break;
+          }
+          case 32: {
+            WorkersCount = input.ReadInt32();
+            break;
+          }
+          case 40: {
+            WorkerNumber = input.ReadInt32();
+            break;
+          }
+          case 49: {
+            Avalue = input.ReadDouble();
+            break;
+          }
+          case 57: {
+            Bvalue = input.ReadDouble();
             break;
           }
         }
@@ -278,17 +391,28 @@ namespace GrpcGreeterClient {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 10:
-          case 9: {
-            request_.AddEntriesFrom(ref input, _repeated_request_codec);
-            break;
-          }
           case 16: {
             Nvalue = input.ReadInt32();
             break;
           }
           case 25: {
             Hvalue = input.ReadDouble();
+            break;
+          }
+          case 32: {
+            WorkersCount = input.ReadInt32();
+            break;
+          }
+          case 40: {
+            WorkerNumber = input.ReadInt32();
+            break;
+          }
+          case 49: {
+            Avalue = input.ReadDouble();
+            break;
+          }
+          case 57: {
+            Bvalue = input.ReadDouble();
             break;
           }
         }

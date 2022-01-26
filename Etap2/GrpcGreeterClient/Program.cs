@@ -1,6 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-// using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Grpc.Net.Client;
 using GrpcGreeterClient;
 using Google.Protobuf.Collections;
@@ -66,50 +66,50 @@ namespace ConsoleApp3
         }
     }
 
-    public class ExThread
-    {   
-        private int thread_number;
-        private double h;
-        private double[] results;
-        private int n;
-        public ExThread(int thread_number, double h, int n){
-            this.thread_number=thread_number;
-            this.h=h;
-            this.n=n;
-            this.results = new double[thread_number];
-        }
-        public double[] get_results(){
-            return results;
-        }
+    // public class ExThread
+    // {   
+    //     private int thread_number;
+    //     private double h;
+    //     private double[] results;
+    //     private int n;
+    //     public ExThread(int thread_number, double h, int n){
+    //         this.thread_number=thread_number;
+    //         this.h=h;
+    //         this.n=n;
+    //         this.results = new double[thread_number];
+    //     }
+    //     public double[] get_results(){
+    //         return results;
+    //     }
 
-        async public void mythread1(int thread_number, string port, double[] x_array)
-        {   
-            Console.WriteLine("starting thread nr " + thread_number);
-            var channel = GrpcChannel.ForAddress("http://localhost:"+port, new GrpcChannelOptions
-            {
-                MaxReceiveMessageSize = 100 * 1024 * 1024, // 100 MB
-                MaxSendMessageSize = 100 * 1024 * 1024 // 100 MB
-            });
-            var client = new Greeter.GreeterClient(channel);
-            RepeatedField<double> request = new RepeatedField<double>();
-            // Console.WriteLine(request);
-            for (int i = 0; i < x_array.Length; i++)
-            {
-                request.Add(x_array[i]);
-            }
+    //     async public void mythread1(int thread_number, string port, double[] x_array)
+    //     {   
+    //         Console.WriteLine("starting thread nr " + thread_number);
+    //         var channel = GrpcChannel.ForAddress("http://localhost:"+port, new GrpcChannelOptions
+    //         {
+    //             MaxReceiveMessageSize = 100 * 1024 * 1024, // 100 MB
+    //             MaxSendMessageSize = 100 * 1024 * 1024 // 100 MB
+    //         });
+    //         var client = new Greeter.GreeterClient(channel);
+    //         RepeatedField<double> request = new RepeatedField<double>();
+    //         // Console.WriteLine(request);
+    //         for (int i = 0; i < x_array.Length; i++)
+    //         {
+    //             request.Add(x_array[i]);
+    //         }
 
-            var watch = System.Diagnostics.Stopwatch.StartNew();
-            var res = await client.SayHelloAsync(new HelloRequest { Request = {request}, Nvalue = this.n, Hvalue =this.h });
-            Console.WriteLine("iterations: ", res.Iterations);
-            double  local_results = res.Response;
-            lock(results){
-                results[thread_number] = local_results;
-            }
-            watch.Stop();
-            var elapsedMs = watch.ElapsedMilliseconds;
-            Console.WriteLine("worker number: " + (thread_number + 1) + "  time: " + elapsedMs + " local result: " + local_results);
-        }
-    }
+    //         var watch = System.Diagnostics.Stopwatch.StartNew();
+    //         var res = await client.SayHelloAsync(new HelloRequest { Request = {request}, Nvalue = this.n, Hvalue =this.h });
+    //         Console.WriteLine("iterations: ", res.Iterations);
+    //         double  local_results = res.Response;
+    //         lock(results){
+    //             results[thread_number] = local_results;
+    //         }
+    //         watch.Stop();
+    //         var elapsedMs = watch.ElapsedMilliseconds;
+    //         Console.WriteLine("worker number: " + (thread_number + 1) + "  time: " + elapsedMs + " local result: " + local_results);
+    //     }
+    // }
 
     class Program
     {
@@ -164,26 +164,55 @@ namespace ConsoleApp3
             // GRPC calculations:   
             Console.WriteLine("");
             Console.WriteLine("Now using grpc");
-            ExThread obj = new ExThread(thread_number,h,n);
-            Thread[] threads_array = new Thread[thread_number];
+            // ExThread obj = new ExThread(thread_number,h,n);
+            // Thread[] threads_array = new Thread[thread_number];
+
             var watch2 = System.Diagnostics.Stopwatch.StartNew();
+            GrpcChannel[] channels = new GrpcChannel[args.Length];
+            Greeter.GreeterClient[] clients = new Greeter.GreeterClient[args.Length];
+            Grpc.Core.AsyncUnaryCall<HelloReply>[] responses = new Grpc.Core.AsyncUnaryCall<HelloReply>[args.Length];
+            HelloReply[] replys = new HelloReply[args.Length];
             for (var i = 0; i < args.Length; i++)
             {
                 var xd = i;
-                string port = String.Copy(args[i]);
-                threads_array[i] = new Thread(() => obj.mythread1(xd, port, listOfSplitArray.ElementAt(xd).ToArray()));
-                threads_array[i].Start();
+                // string port = String.Copy(args[i]);
+                // threads_array[i] = new Thread(() => obj.mythread1(xd, port, listOfSplitArray.ElementAt(xd).ToArray()));
+                // threads_array[i].Start();
+                channels[i] = GrpcChannel.ForAddress("http://localhost:"+args[i], new GrpcChannelOptions
+                {
+                    MaxReceiveMessageSize = 100 * 1024 * 1024, // 100 MB
+                    MaxSendMessageSize = 100 * 1024 * 1024 // 100 MB
+                });
+                clients[i] = new Greeter.GreeterClient(channels[i]);
+                RepeatedField<double> request = new RepeatedField<double>();
+                var arr = listOfSplitArray.ElementAt(xd).ToArray();
+                // for (int j = 0; j < arr.Length; j++)
+                // {
+                //     request.Add(arr[j]);
+                // }
+                responses[i] = clients[i].SayHelloAsync(new HelloRequest { 
+                        Nvalue = N,
+                        Hvalue = h,
+                        WorkersCount = args.Length,
+                        WorkerNumber = i,
+                        Avalue = a,
+                        Bvalue = b,
+                });
+
             }
-            for (int i = 0; i < args.Length; i++)
+            var whenall = await Task.WhenAll(responses.Select(c=>c.ResponseHeadersAsync));
+            for (var i = 0; i < args.Length; i++)
             {
-                threads_array[i].Join();
+                replys[i] = await responses[i];
+                Console.WriteLine(replys[i]);
             }
+
             watch2.Stop();
             var elapsedMs2 = watch2.ElapsedMilliseconds;
-            Console.WriteLine("joined add threads");
+            // Console.WriteLine("joined add threads");
             decimal thread_result = 0;
-            for(int i = 0; i< thread_number; i++){
-                thread_result += System.Convert.ToDecimal(obj.get_results()[i]);
+            for(int i = 0; i< args.Length; i++){
+                thread_result += System.Convert.ToDecimal(replys[i].Response);
             }
             thread_result += System.Convert.ToDecimal(Fx0 + Fxn);
             Console.WriteLine("GRPC Result: " + thread_result);
