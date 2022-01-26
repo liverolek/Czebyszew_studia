@@ -24,16 +24,17 @@ namespace GrpcGreeterClient {
     static GreetReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChJQcm90b3MvZ3JlZXQucHJvdG8SBWdyZWV0IhwKDEhlbGxvUmVxdWVzdBIM",
-            "CgRuYW1lGAEgASgJIh0KCkhlbGxvUmVwbHkSDwoHbWVzc2FnZRgBIAEoCTI9",
-            "CgdHcmVldGVyEjIKCFNheUhlbGxvEhMuZ3JlZXQuSGVsbG9SZXF1ZXN0GhEu",
-            "Z3JlZXQuSGVsbG9SZXBseUIUqgIRR3JwY0dyZWV0ZXJDbGllbnRiBnByb3Rv",
-            "Mw=="));
+            "ChJQcm90b3MvZ3JlZXQucHJvdG8SBWdyZWV0Ij8KDEhlbGxvUmVxdWVzdBIP",
+            "CgdyZXF1ZXN0GAEgAygBEg4KBm52YWx1ZRgCIAEoBRIOCgZodmFsdWUYAyAB",
+            "KAEiMgoKSGVsbG9SZXBseRIQCghyZXNwb25zZRgBIAEoARISCgppdGVyYXRp",
+            "b25zGAIgASgFMj0KB0dyZWV0ZXISMgoIU2F5SGVsbG8SEy5ncmVldC5IZWxs",
+            "b1JlcXVlc3QaES5ncmVldC5IZWxsb1JlcGx5QhSqAhFHcnBjR3JlZXRlckNs",
+            "aWVudGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::GrpcGreeterClient.HelloRequest), global::GrpcGreeterClient.HelloRequest.Parser, new[]{ "Name" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::GrpcGreeterClient.HelloReply), global::GrpcGreeterClient.HelloReply.Parser, new[]{ "Message" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::GrpcGreeterClient.HelloRequest), global::GrpcGreeterClient.HelloRequest.Parser, new[]{ "Request", "Nvalue", "Hvalue" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::GrpcGreeterClient.HelloReply), global::GrpcGreeterClient.HelloReply.Parser, new[]{ "Response", "Iterations" }, null, null, null, null)
           }));
     }
     #endregion
@@ -77,7 +78,9 @@ namespace GrpcGreeterClient {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public HelloRequest(HelloRequest other) : this() {
-      name_ = other.name_;
+      request_ = other.request_.Clone();
+      nvalue_ = other.nvalue_;
+      hvalue_ = other.hvalue_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -87,15 +90,38 @@ namespace GrpcGreeterClient {
       return new HelloRequest(this);
     }
 
-    /// <summary>Field number for the "name" field.</summary>
-    public const int NameFieldNumber = 1;
-    private string name_ = "";
+    /// <summary>Field number for the "request" field.</summary>
+    public const int RequestFieldNumber = 1;
+    private static readonly pb::FieldCodec<double> _repeated_request_codec
+        = pb::FieldCodec.ForDouble(10);
+    private readonly pbc::RepeatedField<double> request_ = new pbc::RepeatedField<double>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string Name {
-      get { return name_; }
+    public pbc::RepeatedField<double> Request {
+      get { return request_; }
+    }
+
+    /// <summary>Field number for the "nvalue" field.</summary>
+    public const int NvalueFieldNumber = 2;
+    private int nvalue_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Nvalue {
+      get { return nvalue_; }
       set {
-        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        nvalue_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "hvalue" field.</summary>
+    public const int HvalueFieldNumber = 3;
+    private double hvalue_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public double Hvalue {
+      get { return hvalue_; }
+      set {
+        hvalue_ = value;
       }
     }
 
@@ -114,7 +140,9 @@ namespace GrpcGreeterClient {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Name != other.Name) return false;
+      if(!request_.Equals(other.request_)) return false;
+      if (Nvalue != other.Nvalue) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(Hvalue, other.Hvalue)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -122,7 +150,9 @@ namespace GrpcGreeterClient {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      hash ^= request_.GetHashCode();
+      if (Nvalue != 0) hash ^= Nvalue.GetHashCode();
+      if (Hvalue != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(Hvalue);
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -141,9 +171,14 @@ namespace GrpcGreeterClient {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (Name.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Name);
+      request_.WriteTo(output, _repeated_request_codec);
+      if (Nvalue != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Nvalue);
+      }
+      if (Hvalue != 0D) {
+        output.WriteRawTag(25);
+        output.WriteDouble(Hvalue);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -155,9 +190,14 @@ namespace GrpcGreeterClient {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Name.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Name);
+      request_.WriteTo(ref output, _repeated_request_codec);
+      if (Nvalue != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Nvalue);
+      }
+      if (Hvalue != 0D) {
+        output.WriteRawTag(25);
+        output.WriteDouble(Hvalue);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -169,8 +209,12 @@ namespace GrpcGreeterClient {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (Name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      size += request_.CalculateSize(_repeated_request_codec);
+      if (Nvalue != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Nvalue);
+      }
+      if (Hvalue != 0D) {
+        size += 1 + 8;
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -184,8 +228,12 @@ namespace GrpcGreeterClient {
       if (other == null) {
         return;
       }
-      if (other.Name.Length != 0) {
-        Name = other.Name;
+      request_.Add(other.request_);
+      if (other.Nvalue != 0) {
+        Nvalue = other.Nvalue;
+      }
+      if (other.Hvalue != 0D) {
+        Hvalue = other.Hvalue;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -202,8 +250,17 @@ namespace GrpcGreeterClient {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 10: {
-            Name = input.ReadString();
+          case 10:
+          case 9: {
+            request_.AddEntriesFrom(input, _repeated_request_codec);
+            break;
+          }
+          case 16: {
+            Nvalue = input.ReadInt32();
+            break;
+          }
+          case 25: {
+            Hvalue = input.ReadDouble();
             break;
           }
         }
@@ -221,8 +278,17 @@ namespace GrpcGreeterClient {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 10: {
-            Name = input.ReadString();
+          case 10:
+          case 9: {
+            request_.AddEntriesFrom(ref input, _repeated_request_codec);
+            break;
+          }
+          case 16: {
+            Nvalue = input.ReadInt32();
+            break;
+          }
+          case 25: {
+            Hvalue = input.ReadDouble();
             break;
           }
         }
@@ -269,7 +335,8 @@ namespace GrpcGreeterClient {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public HelloReply(HelloReply other) : this() {
-      message_ = other.message_;
+      response_ = other.response_;
+      iterations_ = other.iterations_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -279,15 +346,27 @@ namespace GrpcGreeterClient {
       return new HelloReply(this);
     }
 
-    /// <summary>Field number for the "message" field.</summary>
-    public const int MessageFieldNumber = 1;
-    private string message_ = "";
+    /// <summary>Field number for the "response" field.</summary>
+    public const int ResponseFieldNumber = 1;
+    private double response_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string Message {
-      get { return message_; }
+    public double Response {
+      get { return response_; }
       set {
-        message_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        response_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "iterations" field.</summary>
+    public const int IterationsFieldNumber = 2;
+    private int iterations_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Iterations {
+      get { return iterations_; }
+      set {
+        iterations_ = value;
       }
     }
 
@@ -306,7 +385,8 @@ namespace GrpcGreeterClient {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Message != other.Message) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(Response, other.Response)) return false;
+      if (Iterations != other.Iterations) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -314,7 +394,8 @@ namespace GrpcGreeterClient {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (Message.Length != 0) hash ^= Message.GetHashCode();
+      if (Response != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(Response);
+      if (Iterations != 0) hash ^= Iterations.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -333,9 +414,13 @@ namespace GrpcGreeterClient {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (Message.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Message);
+      if (Response != 0D) {
+        output.WriteRawTag(9);
+        output.WriteDouble(Response);
+      }
+      if (Iterations != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Iterations);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -347,9 +432,13 @@ namespace GrpcGreeterClient {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Message.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Message);
+      if (Response != 0D) {
+        output.WriteRawTag(9);
+        output.WriteDouble(Response);
+      }
+      if (Iterations != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Iterations);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -361,8 +450,11 @@ namespace GrpcGreeterClient {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (Message.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Message);
+      if (Response != 0D) {
+        size += 1 + 8;
+      }
+      if (Iterations != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Iterations);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -376,8 +468,11 @@ namespace GrpcGreeterClient {
       if (other == null) {
         return;
       }
-      if (other.Message.Length != 0) {
-        Message = other.Message;
+      if (other.Response != 0D) {
+        Response = other.Response;
+      }
+      if (other.Iterations != 0) {
+        Iterations = other.Iterations;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -394,8 +489,12 @@ namespace GrpcGreeterClient {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 10: {
-            Message = input.ReadString();
+          case 9: {
+            Response = input.ReadDouble();
+            break;
+          }
+          case 16: {
+            Iterations = input.ReadInt32();
             break;
           }
         }
@@ -413,8 +512,12 @@ namespace GrpcGreeterClient {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 10: {
-            Message = input.ReadString();
+          case 9: {
+            Response = input.ReadDouble();
+            break;
+          }
+          case 16: {
+            Iterations = input.ReadInt32();
             break;
           }
         }
